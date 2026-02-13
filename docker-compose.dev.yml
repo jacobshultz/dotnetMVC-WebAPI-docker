@@ -1,0 +1,15 @@
+services:
+  api:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    working_dir: /work
+    volumes:
+      - .:/work
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    command: >
+      bash -lc "dotnet restore src/Api/Api.csproj
+      && dotnet watch --project src/Api run --urls http://0.0.0.0:8080"
+

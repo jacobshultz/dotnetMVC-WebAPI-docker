@@ -1,0 +1,13 @@
+{
+  "name": "Dotnet API Debug",
+  "dockerComposeFile": "../docker-compose.debug.yml",
+  "service": "api",
+  "workspaceFolder": "/work",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp"
+      ]
+    }
+  }
+}
