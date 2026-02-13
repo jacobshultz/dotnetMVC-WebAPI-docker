@@ -1,10 +1,20 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Services (must be BEFORE builder.Build())
+
+
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+
+app.MapControllers();
+
+
+
+
+
 
 // Middleware
 if (app.Environment.IsDevelopment())
