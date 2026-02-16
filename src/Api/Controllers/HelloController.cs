@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Api.Models;
+
 
 namespace Api.Controllers;
 
@@ -37,6 +39,22 @@ public class HelloController : ControllerBase
             Length = request.Message?.Length
         });
     }
+
+    [HttpPost("person")]
+    public IActionResult PostPerson([FromBody] Person person)
+{
+    // Example "strongly typed" usage
+    var fullName = $"{person.FirstName} {person.LastName}".Trim();
+
+    return Ok(new
+    {
+        FullName = fullName,
+        person.Age,
+        IsAdult = person.Age >= 18
+    });
+}
+
+
 }
 
 public class MessageRequest
