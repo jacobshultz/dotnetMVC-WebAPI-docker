@@ -3,13 +3,13 @@ using Api.Models;
 
 public class FileManager
 {
-    private List<Person> _peoples;
+    public List<Person> Persons { get; set; }
 
-    private static readonly Lazy<FileManager> lazySingleton
+    private static readonly Lazy<FileManager> _lazySingleton
         = new Lazy<FileManager>(() => new FileManager());
 
     public static FileManager Instance
-        => lazySingleton.Value;
+        => _lazySingleton.Value;
 
     private FileManager()
     {
@@ -19,17 +19,24 @@ public class FileManager
 
     private void GetFromJson()
     {
-        using (StreamReader json = new StreamReader(Path.GetFullPath("..\\records.json")))
+        try
         {
-            string jsonVal = json.ReadToEnd();
-            this._peoples = JsonSerializer.Deserialize<List<Person>>(jsonVal) ?? new List<Person>();
+            using (StreamReader json = new StreamReader(Path.GetFullPath("../Api/records.json")))
+            {
+                string jsonVal = json.ReadToEnd();
+                this.Persons = JsonSerializer.Deserialize<List<Person>>(jsonVal) ?? new List<Person>();
+            }
+        }
+        catch
+        {
+            this.Persons = new List<Person>();
         }
     }
 
-    private void SaveToJson()
+    public void Save()
     {
-        string jsonString = JsonSerializer.Serialize(this._peoples);
-        using (StreamWriter json = new StreamWriter(Path.GetFullPath("..\\records.json")))
+        string jsonString = JsonSerializer.Serialize(this.Persons);
+        using (StreamWriter json = new StreamWriter(Path.GetFullPath("../Api/records.json")))
         {
             json.Write(jsonString);
         }
