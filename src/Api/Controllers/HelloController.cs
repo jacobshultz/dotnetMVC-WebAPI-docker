@@ -42,17 +42,16 @@ public class HelloController : ControllerBase
 
     [HttpPost("person")]
     public IActionResult PostPerson([FromBody] Person person)
-{
-    // Example "strongly typed" usage
-    var fullName = $"{person.FirstName} {person.LastName}".Trim();
-
-    return Ok(new
     {
-        FullName = fullName,
-        person.Age,
-        IsAdult = person.Age >= 18
-    });
-}
+        // Example "strongly typed" usage
+        var fullName = $"{person.FirstName} {person.LastName}".Trim();
+
+        return Ok(new
+        {
+            FullName = fullName,
+            person.School
+        });
+    }
 
 
 }

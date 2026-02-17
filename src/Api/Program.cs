@@ -13,9 +13,6 @@ app.MapControllers();
 
 
 
-
-
-
 // Middleware
 if (app.Environment.IsDevelopment())
 {
